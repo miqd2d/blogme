@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Blogify - Blog Page Project</title>
+    <%- include('./partials/head.ejs') %>
+  </head>
+
+  <body>
+    <%- include('./partials/nav.ejs') %>
+
+    <div class="container mt-4">
+      <% if (locals.blog) { %>
+        <div class="card mb-3">
+          <div class="ratio ratio-16x9" style="max-height: 400px">
+            <img
+              src="/<%= blog.coverImage %>"
+              class="card-img-top"
+              alt="Cover Image"
+              style="object-fit: cover"
+            />
+          </div>
+
+          <div class="card-body">
+            <h2 class="card-title mb-3"><%= blog.title %></h2>
+
+            <p class="blockquote-footer d-inline mb-5">
+              By <%= blog.createdBy ? blog.createdBy.fullName : "Unknown Author" %>
+              <% if (blog.createdBy && blog.createdBy.profilePicURL) { %>
+                <img
+                  src="/<%= blog.createdBy.profilePicURL %>"
+                  alt="Profile Photo"
+                  class="ms-2"
+                  style="border-radius: 50%; object-fit: cover"
+                  width="25"
+                  height="25"
+                />
+              <% } %>
+            </p>
+
+            <p class="card-text mb-3"><%= blog.body %></p>
+
+            <p class="card-text mb-3">
+              <small class="text-body-secondary">
+                Last updated
+                <% 
+                  const updated = new Date(blog.updatedAt); 
+                  const now = new Date(); 
+                  const diffMs = now - updated; 
+                  const diffMins = Math.floor(diffMs / 60000); 
+                  const diffHours = Math.floor(diffMins / 60); 
+                  const diffDays = Math.floor(diffHours / 24); 
+                %>
+                <% if (diffMins < 1) { %>
+                  just now
+                <% } else if (diffMins < 60) { %>
+                  <%= diffMins %> min<%= diffMins > 1 ? 's' : '' %> ago
+                <% } else if (diffHours < 24) { %>
+                  <%= diffHours %> hour<%= diffHours > 1 ? 's' : '' %> ago
+                <% } else { %>
+                  <%= diffDays %> day<%= diffDays > 1 ? 's' : '' %> ago
+                <% } %>
+              </small>
+            </p>
+          </div>
+        </div>
+
+        <div class="container mt-3">
+          <h2>Comments</h2>
+
+          <% if (locals.user) { %>
+            <form
+              action="/blog/<%= blog._id %>/comment"
+              method="post"
+              class="d-flex align-items-center gap-2 mb-3"
+            >
+              <input
+                type="text"
+                class="form-control"
+                name="comment"
+                id="comment"
+                placeholder="Write a comment..."
+                required
+                style="flex: 1"
+              />
+              <button type="submit" class="btn btn-primary">Post</button>
+            </form>
+          <% } else { %>
+            <p>Please <a href="/user/login">login</a> to comment.</p>
+          <% } %>
+
+          <% if (locals.comments && comments.length > 0) { %>
+            <ul class="list-group list-group-flush mb-5">
+              <% comments.forEach(comment => { %>
+                <li class="list-group-item d-flex align-items-center">
+                  <% if (comment.user && comment.user.profilePicURL) { %>
+                    <img
+                      src="/<%= comment.user.profilePicURL %>"
+                      alt="User Photo"
+                      class="me-2"
+                      style="border-radius: 50%; object-fit: cover"
+                      width="30"
+                      height="30"
+                    />
+                  <% } %>
+                  <span><strong><%= comment.user ? comment.user.fullName : "Anonymous" %>:</strong> <%= comment.comment %></span>
+                </li>
+              <% }) %>
+            </ul>
+          <% } else { %>
+            <p class="text-muted">No comments yet. Be the first to comment!</p>
+          <% } %>
+        </div>
+      <% } %>
+    </div>
+
+    <%- include('./partials/script.ejs') %>
+  </body>
+</html>

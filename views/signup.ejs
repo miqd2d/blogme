@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Blogify - Sign Up</title>
+    <%- include('./partials/head.ejs') %>
+  </head>
+  <body>
+
+    <%- include('./partials/nav') %>
+
+    
+    <h2 class="m-5 text-center">Sign Up</h2>
+
+    <% if (locals.error) { %>
+    <div class="alert alert-danger m-5" role="alert">
+      <%= locals.error %>
+    </div>
+
+    <% } %>
+
+    <!-- Signup Form -->
+    <form class="m-5" action="/user/signup" method="post" enctype="multipart/form-data">
+      <div class="mb-3">
+        <label for="exampleInputName1" class="form-label">Full name</label>
+        <input
+          type="text"
+          name="fullName"
+          class="form-control"
+          id="exampleInputName1"
+          aria-describedby="emailHelp"
+        />
+      </div>
+      <div class="mb-3">
+        <label for="exampleInputName1" class="form-label">Profile Photo</label>
+        <input
+          type="file"
+          name="profilePhoto"
+          class="form-control"
+          id="profilePhoto"
+        />
+      </div>
+      <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Email address</label>
+        <input
+          type="email"
+          name="email"
+          class="form-control"
+          id="exampleInputEmail1"
+          aria-describedby="emailHelp"
+        />
+      </div>
+      <div class="mb-3">
+        <label for="exampleInputPassword1" class="form-label">Password</label>
+        <input
+          type="password"
+          name="password"
+          class="form-control"
+          id="exampleInputPassword1"
+        />
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+    <%- include('./partials/script.ejs') %>
+  </body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Blogify - Blog Page Project</title>
+    <%- include('./partials/head.ejs') %>
+  </head>
+  <body>
+    <%- include('./partials/nav.ejs') %>
+
+    <!-- Form to add all blod -->
+    <div class="container mt-4">
+      <form
+        class="container mt-4"
+        action="/blog/add"
+        method="post"
+        enctype="multipart/form-data"
+      >
+        <div class="mb-3">
+          <!-- Title -->
+          <label for="title" class="form-label">Title</label>
+          <input
+            name="title"
+            type="text"
+            class="form-control"
+            id="title"
+            aria-describedby="title"
+          />
+        </div>
+        <!-- Cover Image -->
+        <div class="mb-3">
+          <label for="coverImage" class="form-label">Cover Image</label>
+          <input
+            name="coverImage"
+            type="file"
+            class="form-control"
+            id="coverImage"
+            aria-describedby="coverImage"
+          />
+        </div>
+        <!-- Body -->
+        <div class="mb-3">
+          <label class="form-label" for="floatingTextarea2">Blog Body</label>
+          <textarea
+            name="body"
+            class="form-control"
+            id="floatingTextarea2"
+            style="height: 100px"
+          ></textarea>
+        </div>
+        <!-- Submit Button -->
+        <div class="mb-3">
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+      </form>
+    </div>
+
+    <%- include('./partials/script.ejs') %>
+  </body>
+</html>
