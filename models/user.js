@@ -31,9 +31,6 @@ const userSchema =new Schema(
   }
 );
 
-userSchema.index({ email: 1 }, { unique: true });
-
-
 // Pre middleware for geenrating salt and hashed password
 userSchema.pre("save", async function (next) {
   // Check if password is modified {when first entry it is considered true}
