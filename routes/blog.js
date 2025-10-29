@@ -1,5 +1,6 @@
 const { Router } = require("express");
 const blogRouter = Router();
+const mongoose = require("mongoose");
 
 // Importing the Blog model
 const Blogs = require("../models/blog");
@@ -83,9 +84,15 @@ blogRouter.post(
 
 // Blog Page
 blogRouter.get("/:id", async (req, res) => {
+
+  if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+    return res.render("wrongRequest");
+  }
+
   const blog = await Blogs.findOne({ _id: req.params.id }).populate(
     "createdBy"
   );
+
   const comments = await Comment.find({ blog: req.params.id }).populate("user");
 
   // If signed in send user
