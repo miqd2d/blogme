@@ -23,7 +23,7 @@ const userSchema =new Schema(
     },
     profilePicURL: {
       type: String,
-      default: "/images/default.png",
+      default: "https://fheveoramynzflqahwmp.supabase.co/storage/v1/object/public/pictures/default_user.png",
     },
   },
   {

@@ -13,7 +13,7 @@ const blogSchema = new Schema(
     },
     coverImage: {
       type: String,
-      default : "/uploads/default.png"
+      default : "https://fheveoramynzflqahwmp.supabase.co/storage/v1/object/public/pictures/default_blog.png"
     },
     createdBy: {
       type: Schema.Types.ObjectId,

@@ -15,7 +15,7 @@
         <div class="card mb-3">
           <div class="ratio ratio-16x9" style="max-height: 400px">
             <img
-              src="/<%= blog.coverImage %>"
+              src="<%= blog.coverImage %>"
               class="card-img-top"
               alt="Cover Image"
               style="object-fit: cover"
@@ -29,7 +29,7 @@
               By <%= blog.createdBy ? blog.createdBy.fullName : "Unknown Author" %>
               <% if (blog.createdBy && blog.createdBy.profilePicURL) { %>
                 <img
-                  src="/<%= blog.createdBy.profilePicURL %>"
+                  src="<%= blog.createdBy.profilePicURL %>"
                   alt="Profile Photo"
                   class="ms-2"
                   style="border-radius: 50%; object-fit: cover"
@@ -96,7 +96,7 @@
                 <li class="list-group-item d-flex align-items-center">
                   <% if (comment.user && comment.user.profilePicURL) { %>
                     <img
-                      src="/<%= comment.user.profilePicURL %>"
+                      src="<%= comment.user.profilePicURL %>"
                       alt="User Photo"
                       class="me-2"
                       style="border-radius: 50%; object-fit: cover"
